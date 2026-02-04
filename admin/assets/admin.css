@@ -1,0 +1,139 @@
+.indices-estar-admin .ie-card{
+  background:#fff;
+  border:1px solid #dcdcde;
+  border-radius:12px;
+  padding:16px;
+  margin:16px 0;
+}
+
+.indices-estar-admin .ie-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:12px;
+  margin:12px 0;
+}
+
+.indices-estar-admin .ie-grid label span{
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.indices-estar-admin .ie-grid input{
+  width:100%;
+}
+
+.indices-estar-admin .ie-wide{ grid-column: 1 / -1; }
+
+.indices-estar-admin .ie-check{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding-top:22px;
+}
+
+.indices-estar-admin .ie-media{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  margin-top:8px;
+}
+
+.indices-estar-admin .ie-media-preview{
+  width:140px;
+  min-height:180px;
+  border:1px dashed #c3c4c7;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:#fafafa;
+}
+
+.indices-estar-admin .ie-media-preview img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+.indices-estar-admin .ie-children{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.indices-estar-admin .ie-item{
+  position: relative;
+  border:1px solid #e5e5e5;
+  border-radius:12px;
+  padding:12px;
+  margin:10px 0;
+}
+
+.indices-estar-admin .ie-drag{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #dcdcde;
+  background:#fff;
+  cursor:grab;
+  user-select:none;
+  font-size:16px;
+  line-height:1;
+}
+
+.indices-estar-admin .ie-item.is-dragging{
+  opacity:.7;
+  border-style: dashed;
+}
+
+.indices-estar-admin .ie-item.is-drop-target{
+  outline:2px solid #2271b1;
+  outline-offset:2px;
+}
+
+.indices-estar-admin .ie-move-controls{
+  display:flex;
+  gap:8px;
+  margin:8px 0 10px;
+}
+.indices-estar-admin .ie-move-controls .button{ height:34px; }
+
+@media (max-width: 782px){
+  .indices-estar-admin .ie-move-controls{ flex-wrap:wrap; }
+  .indices-estar-admin .ie-children{ grid-template-columns: 1fr; }
+}
+
+
+.indices-estar-admin #ie_shortcode{
+  display:inline-block;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.ie-sc-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+
+/* Admin: checkbox row should not stretch full width */
+.indices-estar-admin .ie-check{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  width:auto;
+}
+.indices-estar-admin .ie-check input[type="checkbox"]{
+  margin:0;
+}
+
+
+/* Admin: make url_blank checkbox row shrink-to-fit inside grid */
+.indices-estar-admin .ie-grid > label.ie-check{
+  width:max-content !important;
+  justify-self:start;
+}
+.indices-estar-admin .ie-grid > label.ie-check span{
+  white-space:nowrap;
+}

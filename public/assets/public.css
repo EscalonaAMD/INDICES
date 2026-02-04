@@ -1,0 +1,375 @@
+/* Tipografías: usar las ya cargadas en el sitio */
+.indices-estar{
+  font-family: 'Open Sans', sans-serif;
+  position:relative;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:14px;
+}
+
+.indices-estar .ie-col{
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:16px;
+  overflow:hidden;
+  background:#fff;
+  min-height: 420px;
+}
+
+.indices-estar .ie-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 12px;
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+
+.indices-estar .ie-title{
+  text-align:center;
+  flex:1;
+}
+
+.indices-estar .ie-year{
+  font-family:'Roboto', sans-serif;
+  font-size:22px;
+  font-weight:700;
+}
+
+.indices-estar .ie-numdate{
+  font-family:'Roboto', sans-serif;
+  font-size:16px;
+  font-weight:700;
+}
+
+.indices-estar .ie-nav{
+  width:38px;
+  height:38px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.14);
+  background:#fff;
+  cursor:pointer;
+  line-height:1;
+  font-size:20px;
+}
+
+.indices-estar .ie-nav:hover{
+  border-color: rgba(0,0,0,.3);
+}
+
+.indices-estar .ie-body{
+  padding:12px;
+}
+
+.indices-estar .ie-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.indices-estar .ie-number{
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:12px;
+  padding:10px 12px;
+  cursor:pointer;
+  user-select:none;
+  transition: transform .18s ease, background-color .18s ease, border-color .18s ease;
+}
+
+.indices-estar .ie-number:hover{
+  border-color: rgba(0,0,0,.25);
+}
+
+.indices-estar .ie-number.is-active{
+  border-color: rgba(0,0,0,.45);
+  background: rgba(0,0,0,.04);
+  font-weight:700;
+  transform: translateX(2px);
+}
+
+.indices-estar .ie-number.ie-pulse{
+  animation: ie-pulse .22s ease;
+}
+
+@keyframes ie-pulse{
+  0%   { transform: translateX(0); }
+  60%  { transform: translateX(4px); }
+  100% { transform: translateX(2px); }
+}
+
+.indices-estar .ie-items{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.indices-estar .ie-item-row{
+  display:grid;
+  grid-template-columns: 120px 1fr 160px;
+  gap:10px;
+  align-items:start;
+  padding:10px 10px;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
+}
+
+.indices-estar .ie-item-sec{
+  font-weight:700;
+}
+
+.indices-estar .ie-item-title{
+  color:inherit;
+  text-decoration:none;
+}
+
+.indices-estar a.ie-item-title:hover{
+  text-decoration:underline;
+}
+
+.indices-estar .ie-item-author{
+  opacity:.8;
+  text-align:right;
+}
+
+.indices-estar .ie-image-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:center;
+}
+
+.indices-estar .ie-image-link{
+  width:100%;
+}
+
+.indices-estar .ie-image{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:14px;
+}
+
+.indices-estar .ie-image-title{
+  width:100%;
+  text-align:center;
+  font-family:'Roboto', sans-serif;
+  font-weight:700;
+}
+
+.indices-estar .ie-image-title a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.indices-estar .ie-image-title a:hover{
+  text-decoration:underline;
+}
+
+.indices-estar .ie-status{
+  position:absolute;
+  left:-9999px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+/* Responsive */
+@media (max-width: 860px){
+  .indices-estar{
+    grid-template-columns: 1fr;
+  }
+  .indices-estar .ie-item-row{
+    grid-template-columns: 1fr;
+  }
+  .indices-estar .ie-item-author{
+    text-align:left;
+  }
+}
+
+/* ========= Transiciones suaves ========= */
+.indices-estar .ie-fade{
+  transition: opacity .22s ease, transform .22s ease;
+  will-change: opacity, transform;
+}
+
+.indices-estar.is-loading .ie-fade{
+  opacity: .55;
+  transform: translateY(2px);
+}
+
+.indices-estar .ie-skeleton{ display:none; }
+.indices-estar.is-loading .ie-skeleton{ display:block; }
+
+.indices-estar.is-loading .ie-numbers,
+.indices-estar.is-loading .ie-items,
+.indices-estar.is-loading .ie-image-link,
+.indices-estar.is-loading .ie-image-title{
+  visibility:hidden;
+}
+
+/* ========= Skeleton shimmer ========= */
+.indices-estar .ie-skeleton{
+  border-radius: 14px;
+  background: rgba(0,0,0,.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.indices-estar .ie-skeleton::after{
+  content:"";
+  position:absolute;
+  top:0; left:-40%;
+  width:40%;
+  height:100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.55) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  animation: ie-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes ie-shimmer{
+  0% { left:-40%; }
+  100% { left:110%; }
+}
+
+.indices-estar .ie-skel-list{
+  padding: 8px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.indices-estar .ie-skel-line{
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.06);
+}
+
+.indices-estar .ie-skel-items{
+  padding: 8px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.indices-estar .ie-skel-card{
+  height: 72px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.06);
+}
+
+.indices-estar .ie-skel-image{
+  width: 100%;
+  height: 320px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.06);
+}
+
+@media (max-width: 860px){
+  .indices-estar .ie-skel-image{ height: 260px; }
+}
+
+/* Respeta reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .indices-estar .ie-fade,
+  .indices-estar .ie-number{
+    transition: none !important;
+  }
+  .indices-estar .ie-number.ie-pulse{
+    animation: none !important;
+  }
+  .indices-estar .ie-skeleton::after{
+    animation: none !important;
+  }
+}
+
+
+/* Disable skeleton loaders (per visual request) */
+.indices-estar .ie-skeleton{display:none !important;}
+
+
+/* Visual tweaks: narrower col 1, wider col 2 */
+.indices-estar{
+  grid-template-columns: minmax(120px, 0.75fr) minmax(0, 1.6fr) minmax(0, 1fr);
+}
+
+/* Items: stack section, title, author vertically */
+.indices-estar .ie-item-row{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  align-items:flex-start;
+}
+.indices-estar .ie-item-sec,
+.indices-estar .ie-item-title,
+.indices-estar .ie-item-author{
+  width:100%;
+}
+/* Slight typographic hierarchy */
+.indices-estar .ie-item-sec{font-size:12px; opacity:.75;}
+.indices-estar .ie-item-title{font-size:14px;}
+.indices-estar .ie-item-author{font-size:12px; opacity:.75;}
+
+
+/* Mobile: stack columns vertically */
+@media (max-width: 768px){
+  .indices-estar{
+    grid-template-columns: 1fr !important;
+  }
+  .indices-estar .ie-col{
+    width:100%;
+  }
+}
+
+
+/* Mobile: let panels grow with content (remove fixed heights/scroll constraints) */
+@media (max-width: 768px){
+  .indices-estar .ie-body{
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+}
+
+
+/* Mobile: remove fixed panel heights and internal scrolling */
+@media (max-width: 768px){
+  .indices-estar .ie-col{ height:auto !important; min-height:0 !important; }
+  .indices-estar .ie-col .ie-body{
+    height:auto !important;
+    max-height:none !important;
+    min-height:0 !important;
+    overflow:visible !important;
+    flex:0 0 auto !important;
+  }
+  .indices-estar .ie-col .ie-body.ie-fade{ flex:0 0 auto !important; }
+  .indices-estar .ie-col-1 .ie-numbers,
+  .indices-estar .ie-col-2 .ie-items{
+    max-height:none !important;
+    overflow:visible !important;
+  }
+}
+
+
+/* Astra compatibility: ensure chevrons inside nav buttons are visible */
+.indices-estar .ie-nav{
+  color: var(--ast-global-color-2, currentColor) !important;
+  -webkit-text-fill-color: var(--ast-global-color-2, currentColor) !important;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  background: transparent !important;
+  border-color: currentColor !important;
+  opacity: 1;
+  text-indent: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.indices-estar .ie-nav:focus{
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
