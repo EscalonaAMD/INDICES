@@ -13,6 +13,7 @@ class Indices_Estar {
 
     add_action('admin_post_indices_estar_save_group', ['Indices_Estar_Admin','handle_save_group']);
     add_action('admin_post_indices_estar_save_issue', ['Indices_Estar_Admin','handle_save_issue']);
+    add_action('admin_post_indices_estar_save_settings', ['Indices_Estar_Admin','handle_save_settings']);
 
     add_action('admin_post_indices_estar_delete_group', ['Indices_Estar_Admin','handle_delete_group']);
     add_action('admin_post_indices_estar_delete_issue', ['Indices_Estar_Admin','handle_delete_issue']);

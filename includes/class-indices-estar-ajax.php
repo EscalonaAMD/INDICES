@@ -53,7 +53,7 @@ class Indices_Estar_Ajax {
     }
 
     $year=(int)$issue['year']; $num=(int)$issue['number'];
-    $adjIds = Indices_Estar_DB::get_adjacent_ids_by_value($group_id, $year, $num);
+    $adjIds = Indices_Estar_DB::get_adjacent_ids_by_value($group_id, $year, $num, (int)$issue['id']);
     $adjYears = Indices_Estar_DB::get_adjacent_years($group_id, $year);
 
     $payload = [

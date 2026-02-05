@@ -247,18 +247,41 @@ class Indices_Estar_DB {
     set_transient($key, $id, self::TTL_LATEST);
     return $id;
   }
-  public static function get_adjacent_ids_by_value(int $group_id, int $year, int $num): array {
-    global $wpdb; $ti=self::table_issues();
-    $prev=(int)($wpdb->get_var($wpdb->prepare(
-      "SELECT id FROM $ti WHERE group_id=%d AND ((year>%d) OR (year=%d AND number>%d)) ORDER BY year ASC, number ASC LIMIT 1",
-      $group_id,$year,$year,$num
-    )) ?: 0);
-    $next=(int)($wpdb->get_var($wpdb->prepare(
-      "SELECT id FROM $ti WHERE group_id=%d AND ((year<%d) OR (year=%d AND number<%d)) ORDER BY year DESC, number DESC LIMIT 1",
-      $group_id,$year,$year,$num
-    )) ?: 0);
-    return ['prev'=>$prev,'next'=>$next];
-  }
+  public static function get_adjacent_ids_by_value(int $group_id, int $year, int $num, int $id): array {
+  // Navigation must include duplicates (same year+number), so we include id as tie-breaker.
+  // Global order (newest -> oldest): year DESC, number DESC, id DESC.
+  global $wpdb; $ti=self::table_issues();
+
+  // "Prev" in UI = more recent (newer in global order)
+  $prev = (int)($wpdb->get_var($wpdb->prepare(
+    "SELECT id FROM $ti
+     WHERE group_id=%d
+       AND (
+         year > %d
+         OR (year = %d AND number > %d)
+         OR (year = %d AND number = %d AND id > %d)
+       )
+     ORDER BY year ASC, number ASC, id ASC
+     LIMIT 1",
+    $group_id, $year, $year, $num, $year, $num, $id
+  )) ?: 0);
+
+  // "Next" in UI = less recent (older in global order)
+  $next = (int)($wpdb->get_var($wpdb->prepare(
+    "SELECT id FROM $ti
+     WHERE group_id=%d
+       AND (
+         year < %d
+         OR (year = %d AND number < %d)
+         OR (year = %d AND number = %d AND id < %d)
+       )
+     ORDER BY year DESC, number DESC, id DESC
+     LIMIT 1",
+    $group_id, $year, $year, $num, $year, $num, $id
+  )) ?: 0);
+
+  return ['prev'=>$prev,'next'=>$next];
+}
   public static function get_adjacent_years(int $group_id, int $year): array {
     global $wpdb; $ti=self::table_issues();
     $prevYear=(int)($wpdb->get_var($wpdb->prepare(

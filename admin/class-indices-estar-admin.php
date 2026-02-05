@@ -6,6 +6,7 @@ class Indices_Estar_Admin {
   public static function register_menu(): void {
     add_menu_page(__('Índices','indices-estar'), __('Índices','indices-estar'), 'manage_options', 'indices-estar', [__CLASS__,'render_groups'], 'dashicons-index-card', 56);
     add_submenu_page('indices-estar', __('Índices','indices-estar'), __('Índices','indices-estar'), 'manage_options', 'indices-estar', [__CLASS__,'render_groups']);
+    add_submenu_page('indices-estar', __('Ajustes','indices-estar'), __('Ajustes','indices-estar'), 'manage_options', 'indices-estar-settings', [__CLASS__,'render_settings']);
 
     add_submenu_page(null, __('Editar índice','indices-estar'), __('Editar índice','indices-estar'), 'manage_options', 'indices-estar-group-edit', [__CLASS__,'render_group_edit']);
     add_submenu_page(null, __('Números','indices-estar'), __('Números','indices-estar'), 'manage_options', 'indices-estar-issues', [__CLASS__,'render_issues']);
@@ -133,6 +134,25 @@ public static function handle_delete_issue(): void {
   $redirect = admin_url('admin.php?page=indices-estar-issues' . ($group_id ? '&group_id=' . $group_id : '') . '&deleted=1');
   wp_safe_redirect($redirect);
   exit;
+}
+
+
+
+public static function handle_save_settings(): void {
+  if (!indices_estar_current_user_can_manage()) wp_die(__('No autorizado.','indices-estar'));
+  check_admin_referer('indices_estar_save_settings');
+
+  $delete_on_uninstall = isset($_POST['delete_on_uninstall']) ? 1 : 0;
+  update_option('indices_estar_delete_on_uninstall', $delete_on_uninstall);
+
+  wp_safe_redirect(admin_url('admin.php?page=indices-estar-settings&updated=1'));
+  exit;
+}
+
+public static function render_settings(): void {
+  if (!indices_estar_current_user_can_manage()) wp_die(__('No autorizado.','indices-estar'));
+  $delete_on_uninstall = (int) get_option('indices_estar_delete_on_uninstall', 0);
+  require INDICES_ESTAR_PATH . 'admin/views/page-settings.php';
 }
 
 }
