@@ -373,3 +373,29 @@
   outline: 2px solid currentColor;
   outline-offset: 2px;
 }
+
+/* Hover zoom for linked cover image (only when there is a link wrapper) */
+.indices-estar .ie-image-link { display:block; border-radius:12px; overflow:hidden; cursor:pointer; }
+.indices-estar .ie-image-link .ie-image { transition: transform 180ms ease, filter 180ms ease; transform: translateZ(0); will-change: transform; }
+.indices-estar .ie-image-link:hover .ie-image,
+.indices-estar .ie-image-link:focus-visible .ie-image {
+  transform: scale(1.03) !important;
+  filter: brightness(1.03) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .indices-estar .ie-image-link .ie-image { transition: none !important; }
+  .indices-estar .ie-image-link:hover .ie-image,
+  .indices-estar .ie-image-link:focus-visible .ie-image { transform: none !important; filter: none !important; }
+}
+
+/* Light link decoration for item titles when linked */
+.indices-estar .ie-item-title a{
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: currentColor;
+}
+.indices-estar .ie-item-title a:hover,
+.indices-estar .ie-item-title a:focus-visible{
+  text-decoration-thickness: 2px;
+}
