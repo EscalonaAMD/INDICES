@@ -173,16 +173,27 @@
     if (idx.imageUrl) { img.src=idx.imageUrl; img.alt=idx.imageTitle || ''; } else { img.removeAttribute('src'); img.alt=''; }
 
     if (idx.url) {
+      // Linked cover
       imgLink.style.display = idx.imageUrl ? 'block' : 'none';
-      imgLink.href = idx.url; imgLink.target = '_blank';
-      titleLink.style.display='inline';
-      titleLink.href=idx.url; titleLink.target='_blank';
-      titleLink.textContent=idx.imageTitle || '';
-      titleText.textContent='';
+      imgLink.href = idx.url;
+      imgLink.target = '_blank';
+      imgLink.removeAttribute('aria-disabled');
+
+      titleLink.style.display = 'inline';
+      titleLink.href = idx.url;
+      titleLink.target = '_blank';
+      titleLink.textContent = idx.imageTitle || '';
+      titleText.textContent = '';
     } else {
-      imgLink.style.display='none';
-      titleLink.style.display='none';
-      titleLink.textContent='';
+      // Non-linked cover: keep the image visible (if any) but disable link behavior.
+      imgLink.style.display = idx.imageUrl ? 'block' : 'none';
+      imgLink.removeAttribute('href');
+      imgLink.removeAttribute('target');
+      imgLink.setAttribute('aria-disabled', 'true');
+
+      titleLink.style.display = 'none';
+      titleLink.textContent = '';
+      titleText.textContent = idx.imageTitle || '';
     }
 
     markActiveNumber(container, idx.id);

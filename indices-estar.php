@@ -2,14 +2,14 @@
 /**
  * Plugin Name:       Índices ESTAR
  * Description:       Gestión de índices (grupos) y sus números con frontend interactivo.
- * Version:           2.0.3
+ * Version:           2.0.5
  * Author:            ESTAR
  * Text Domain:       indices-estar
  * Domain Path:       /languages
  */
 if (!defined('ABSPATH')) exit;
 
-define('INDICES_ESTAR_VERSION', '2.0.3');
+define('INDICES_ESTAR_VERSION', '2.0.5');
 define('INDICES_ESTAR_PATH', plugin_dir_path(__FILE__));
 define('INDICES_ESTAR_URL', plugin_dir_url(__FILE__));
 
