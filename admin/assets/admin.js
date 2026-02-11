@@ -112,6 +112,10 @@
   });
 
   $(document).on('click', '.ie-remove-item', function () {
+    const msg = (window.IndicesEstarAdmin && IndicesEstarAdmin.i18n && IndicesEstarAdmin.i18n.confirmDeleteRow)
+      ? IndicesEstarAdmin.i18n.confirmDeleteRow
+      : '¿Seguro que quieres eliminar esta fila?';
+    if (!window.confirm(msg)) return;
     $(this).closest('.ie-item').remove();
     setTimeout(() => {
       normalizeItemNames();
