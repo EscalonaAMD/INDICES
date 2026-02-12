@@ -1,11 +1,5 @@
 /* Tipografías: usar las ya cargadas en el sitio */
-.indices-estar{
-  font-family: 'Open Sans', sans-serif;
-  position:relative;
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap:14px;
-}
+.indices-estar{width:100%;max-width:100%;font-family:inherit;display:block;}
 
 .indices-estar .ie-col{
   border:1px solid rgba(0,0,0,.08);
@@ -403,5 +397,54 @@
   .indices-estar .ie-image-link[href]:focus-visible .ie-image{
     transform:none;
     filter:none;
+  }
+}
+
+
+/* 2.0.7 – Search controls (year/number) */
+.indices-estar .ie-search{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:12px;width:100%;}
+.indices-estar .ie-search-field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.indices-estar .ie-search-label{
+  font-size:12px;
+  opacity:.75;
+  line-height:1;
+}
+.indices-estar .ie-search select{
+  
+  max-width:100%;
+  padding:6px 8px;
+  border:1px solid currentColor;
+  border-radius:8px;
+  background:transparent;
+  color:inherit;
+}
+@media (max-width:768px){
+  .indices-estar .ie-search{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:12px;width:100%;}
+  .indices-estar .ie-search select{ width:100%; }
+  .indices-estar .ie-search-field{ flex:1 1 160px; }
+}
+
+
+.indices-estar-grid{display:grid;grid-template-columns:1fr 2fr 1.2fr;gap:1.5rem;}
+
+
+/* 2.0.7.2 – Search bar wrapper (independent row above the 3-column grid) */
+.indices-estar .ie-search-wrap{
+  width:100%;
+  margin-bottom:12px;
+}
+
+
+/* 2.0.11 – Year select sizing */
+.indices-estar .ie-search-year{ width: 9ch; min-width: 9ch; }
+
+/* 2.0.12 – Mobile: stack the 3 columns vertically */
+@media (max-width: 768px){
+  .indices-estar .indices-estar-grid{
+    grid-template-columns: 1fr !important;
   }
 }

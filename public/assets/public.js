@@ -46,6 +46,8 @@
     state.years = yearsRes.data.years;
     state.activeId = yearsRes.data.latestId;
 
+    buildSearch(container, state);
+
     await loadIndexById(container, state, state.activeId);
 
     yearPrev.addEventListener('click', async () => { if (state.yearsNav.yearPrev) await loadYear(container, state, state.yearsNav.yearPrev, null); });
@@ -57,7 +59,33 @@
     setStatus(container, '');
   }
 
-  async function apiCachedNumbers(state, year) {
+  function buildSearch(container, state) {
+  const yearSel = $('.ie-search-year', container);
+  if (!yearSel) return;
+  state.search = { yearSel };
+
+  yearSel.innerHTML = '';
+  state.years.forEach(y => {
+    const opt = document.createElement('option');
+    opt.value = String(y);
+    opt.textContent = String(y);
+    yearSel.appendChild(opt);
+  });
+
+  yearSel.addEventListener('change', async () => {
+    const y = parseInt(yearSel.value || '0', 10);
+    if (y) await loadYear(container, state, y, null);
+  });
+}
+
+
+function syncSearchToYear(container, state, year) {
+  if (!state.search?.yearSel) return;
+  state.search.yearSel.value = String(year);
+}
+
+
+async function apiCachedNumbers(state, year) {
     if (state.yearNumbersCache.has(year)) return { success:true, data:{ year, numbers: state.yearNumbersCache.get(year) } };
     const res = await api('indices_estar_get_numbers', { group_id: state.groupId, year });
     if (res?.success && Array.isArray(res.data?.numbers)) state.yearNumbersCache.set(year, res.data.numbers);
@@ -79,7 +107,8 @@
     const numsRes = await apiCachedNumbers(state, year);
     state.numbers = (numsRes?.success && numsRes.data?.numbers) ? numsRes.data.numbers : [];
     renderNumbers(container, state);
-
+    syncSearchToYear(container, state, year);
+    
     const targetId = preferredId || (state.numbers[0]?.id ? parseInt(state.numbers[0].id, 10) : 0);
     if (targetId) await loadIndexById(container, state, targetId);
 
@@ -146,7 +175,8 @@
 
     $('.ie-year', container).textContent = String(idx.year);
     $('.ie-numdate', container).textContent = idx.date ? `${idx.number} · ${idx.date}` : String(idx.number);
-
+    syncSearchToYear(container, state, idx.year);
+    
     const itemsWrap = $('.ie-items', container);
     itemsWrap.innerHTML = '';
     const items = idxRes.data.items || [];
@@ -197,7 +227,7 @@
     }
 
     markActiveNumber(container, idx.id);
-    updateNavVisibility(container, state);
+        updateNavVisibility(container, state);
 
     setLoading(container, false);
     setStatus(container, '');

@@ -18,6 +18,15 @@ class Indices_Estar_Shortcode {
 
     ob_start(); ?>
     <div class="indices-estar" data-group-id="<?php echo esc_attr($group_id); ?>" data-start-id="0">
+      <div class="ie-search-wrap">
+      <div class="ie-search" aria-label="<?php echo esc_attr__('Buscar', 'indices-estar'); ?>">
+        <label class="ie-search-field">
+          <span class="ie-search-label"><?php echo esc_html__('Año', 'indices-estar'); ?></span>
+          <select class="ie-search-year" aria-label="<?php echo esc_attr__('Seleccionar año', 'indices-estar'); ?>"></select>
+        </label>
+      
+      </div>
+      <div class="indices-estar-grid">
       <div class="ie-col ie-col-1" aria-label="<?php echo esc_attr__('Año y números', 'indices-estar'); ?>">
         <div class="ie-head">
           <button class="ie-nav ie-year-prev" type="button" aria-label="<?php echo esc_attr__('Año más nuevo', 'indices-estar'); ?>">‹</button>
@@ -60,7 +69,8 @@ class Indices_Estar_Shortcode {
       </div>
 
       <div class="ie-status" role="status" aria-live="polite"></div>
-    </div>
+          </div>
+</div>
     <?php return (string)ob_get_clean();
   }
 }
