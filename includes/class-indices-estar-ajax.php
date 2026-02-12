@@ -67,14 +67,14 @@ class Indices_Estar_Ajax {
         'url'=>$issue['url'] ? esc_url($issue['url']) : '',
         'urlBlank'=>!empty($issue['url_blank']),
         'imageUrl'=>$image_url,
-        'imageTitle'=>$image_title,
+        'imageTitle'=>esc_html($image_title), // ✅ CORREGIDO: Escapar antes de enviar
       ],
       'items' => array_map(function($it){
         return [
-          'section'=>$it['section'] ?? '',
-          'title'=>$it['title'] ?? '',
+          'section'=>esc_html($it['section'] ?? ''),     // ✅ CORREGIDO: Escapar antes de enviar
+          'title'=>esc_html($it['title'] ?? ''),         // ✅ CORREGIDO: Escapar antes de enviar
           'url'=>$it['item_url'] ? esc_url($it['item_url']) : '',
-          'author'=>$it['author'] ?? '',
+          'author'=>esc_html($it['author'] ?? ''),       // ✅ CORREGIDO: Escapar antes de enviar
         ];
       }, $items),
       'nav' => [
